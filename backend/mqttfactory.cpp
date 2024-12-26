@@ -49,7 +49,7 @@ void MqttFactory::disconnectFromBroker()
 
 void MqttFactory::setupAllTopics()
 {
-    subscribeToTopic("default/topic");
+    subscribeToTopic("mqtt/api/measure");
 }
 
 void MqttFactory::handleStateChange(QMqttClient::ClientState state)

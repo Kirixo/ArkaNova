@@ -16,8 +16,12 @@ private:
     std::shared_ptr<QHttpServer> server_;
 
     void setupUserRoutes();
+    void setupSensorRoutes();
+    void setupSolarPanelRoutes();
+    void setupMeasurementRoutes();
 
     void handleOptionsRequest();
+
 };
 
 
