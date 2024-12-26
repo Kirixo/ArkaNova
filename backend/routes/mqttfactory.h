@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QMqttClient>
-#include "logger.h"
+#include "../utils/logger.h"
 
 class MqttFactory : public QObject
 {

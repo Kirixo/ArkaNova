@@ -19,14 +19,27 @@ set(TS_FILES ArkaNova_en_US.ts)
 add_executable(ArkaNova
   main.cpp
   ${TS_FILES}
-  jsonable.h
-  measurement.h measurement.cpp
-  logger.h logger.cpp
-  dbcontroller.h dbcontroller.cpp
-  responsefactory.h responsefactory.cpp
-  routefactory.h routefactory.cpp
-  servercontroller.h servercontroller.cpp
-  mqttfactory.h mqttfactory.cpp
+  controllers/dbcontroller.cpp controllers/dbcontroller.h
+  controllers/servercontroller.cpp controllers/servercontroller.h
+  models/measurement.cpp models/measurement.h routes/mqttfactory.cpp
+  routes/mqttfactory.h routes/routefactory.cpp routes/routefactory.h
+  utils/jsonable.h
+  utils/logger.cpp utils/logger.h
+  utils/responsefactory.cpp utils/responsefactory.h
+  models/user.h models/user.cpp
+  repositories/userrepository.h repositories/userrepository.cpp
+  routes/userhandler.h routes/userhandler.cpp
+  routes/sensorhandler.h routes/sensorhandler.cpp
+  repositories/sensorrepository.h repositories/sensorrepository.cpp
+  models/sensor.h models/sensor.cpp
+  models/sensortype.h models/sensortype.cpp
+  repositories/sensortyperepository.h repositories/sensortyperepository.cpp
+  models/solarpanel.h models/solarpanel.cpp
+  repositories/solarpanelrepository.h repositories/solarpanelrepository.cpp
+  repositories/measurementrepository.h repositories/measurementrepository.cpp
+  routes/solarpanelhandler.h routes/solarpanelhandler.cpp
+  routes/measurementhandler.h routes/measurementhandler.cpp
+  routes/mqttmeasurementhandler.h routes/mqttmeasurementhandler.cpp
 )
 
 target_link_libraries(ArkaNova Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Sql

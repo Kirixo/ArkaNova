@@ -1,13 +1,13 @@
 #include <QCoreApplication>
 #include <QSettings>
 #include <QTranslator>
-#include "servercontroller.h"
-#include "dbcontroller.h"
-#include "routefactory.h"
+#include "./controllers/servercontroller.h"
+#include "./controllers/dbcontroller.h"
+#include "./routes/routefactory.h"
 #include <QtSql/QSqlError>
-#include "logger.h"
+#include "./utils/logger.h"
 #include <QMqttClient>
-#include "mqttfactory.h"
+#include "./routes/mqttfactory.h"
 
 int main(int argc, char *argv[])
 {

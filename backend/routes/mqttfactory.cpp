@@ -1,4 +1,5 @@
 #include "mqttfactory.h"
+#include "mqttmeasurementhandler.h"
 
 MqttFactory::MqttFactory(const QString &broker, int port, const QString &username, const QString &password, QObject *parent)
     : QObject(parent), broker_(broker), port_(port), username_(username), password_(password)
@@ -8,6 +9,10 @@ MqttFactory::MqttFactory(const QString &broker, int port, const QString &usernam
     mqttClient_->setPort(port_);
     mqttClient_->setUsername(username_);
     mqttClient_->setPassword(password_);
+
+
+
+
 
     connect(mqttClient_, &QMqttClient::stateChanged, this, &MqttFactory::handleStateChange);
     connect(mqttClient_, &QMqttClient::errorChanged, this, &MqttFactory::handleError);
@@ -79,5 +84,7 @@ void MqttFactory::handleMessage(const QByteArray &message, const QMqttTopicName 
                                .arg(topic.name(), QString(message)),
                                Logger::LogLevel::Info);
 
+    MqttMeasurementHandler mqttMeasurementHandler;
+    mqttMeasurementHandler.saveMeasurementToDatabase(message);
     emit messageReceived(topic.name(), message);
 }

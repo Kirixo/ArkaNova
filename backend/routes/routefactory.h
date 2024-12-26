@@ -1,7 +1,7 @@
 #ifndef ROUTEFACTORY_H
 #define ROUTEFACTORY_H
 #include <QtHttpServer/QHttpServer>
-#include "dbcontroller.h"
+#include "../controllers/dbcontroller.h"
 
 
 class RouteFactory

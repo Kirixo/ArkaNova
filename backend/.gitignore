@@ -7,6 +7,7 @@ release*/
 include*/
 libs*/
 
+config.ini
 
 # Ignore Qt Creator specific files
 *.pro.user
