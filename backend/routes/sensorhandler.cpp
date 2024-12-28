@@ -22,7 +22,7 @@ QHttpServerResponse SensorHandler::getSensor(const QHttpServerRequest& request) 
 }
 
 QHttpServerResponse SensorHandler::getSensorList(const QHttpServerRequest& request) {
-    auto sensors = sensorRepository_->getAllSensors();
+    auto sensors = sensorRepository_->getSensorsByPanelId();
     QJsonArray sensorArray;
     for (const auto& sensor : sensors) {
         sensorArray.append(sensor.toJson());

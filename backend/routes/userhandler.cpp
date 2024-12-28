@@ -30,7 +30,6 @@ QHttpServerResponse UserHandler::updateUser(const QHttpServerRequest& request) {
         return ResponseFactory::createResponse("Invalid JSON format.", QHttpServerResponse::StatusCode::BadRequest);
     }
 
-    // Ensure required fields are present
     if (!json.contains("id") || (!json.contains("email") && !json.contains("password"))) {
         return ResponseFactory::createResponse("Missing required fields (id, email, or password).",
                                                QHttpServerResponse::StatusCode::BadRequest);

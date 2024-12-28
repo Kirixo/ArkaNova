@@ -25,7 +25,7 @@ std::optional<Sensor> SensorRepository::getSensorById(qint64 id) {
     return std::nullopt;
 }
 
-QList<Sensor> SensorRepository::getAllSensors() {
+QList<Sensor> SensorRepository::getSensorsByPanelId() {
     QList<Sensor> sensors;
     QSqlQuery query(DBController::getDatabase());
     query.prepare("SELECT id, solar_panel_id, sensor_type_id AS type FROM sensor");

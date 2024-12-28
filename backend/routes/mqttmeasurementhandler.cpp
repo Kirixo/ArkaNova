@@ -22,7 +22,7 @@ void MqttMeasurementHandler::saveMeasurementToDatabase(const QByteArray& message
     QJsonObject jsonObj = jsonDoc.object();
 
     if (!jsonObj.contains("data") || !jsonObj.contains("sensor_id")) {
-        Logger::instance().log("MQTT: JSON message missing required fields (data, sensor_id, recorded_at).", Logger::LogLevel::Error);
+        Logger::instance().log("MQTT: JSON message missing required fields (data, sensor_id).", Logger::LogLevel::Error);
         return;
     }
     SensorRepository sensorRepository;
