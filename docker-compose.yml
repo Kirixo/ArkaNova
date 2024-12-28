@@ -1,0 +1,41 @@
+services:
+  api:
+    build: ./backend
+    depends_on:
+      - mqttbroker
+      - database
+    volumes:
+      - ./backend:/app
+      - ./backend/dockerbuild:/build
+    networks:
+      - app-network
+      - db-network
+
+  database:
+    image: postgres:15
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_USER: kirixo
+      POSTGRES_PASSWORD: 1111
+      POSTGRES_DB: arkanovadb
+    volumes:
+      - ./db/ArkaNova.sql:/docker-entrypoint-initdb.d/ArkaNova.sql
+    networks:
+      - db-network
+  ngrok:
+    image: ngrok/ngrok:latest
+    command: http app:4925 --url=literate-vastly-pony.ngrok-free.app
+    environment: 
+      NGROK_AUTHTOKEN: 2hAY34ptDMfqzhti7skGACsKB5c_64p8iSLUv9Q5TJv7ckLfV
+    networks:
+      - app-network
+  mqttbroker:
+    build: ./mosquitto
+    ports: 
+      - "1883:1883"
+    networks:
+      - app-network
+networks:
+  app-network:
+  db-network:
