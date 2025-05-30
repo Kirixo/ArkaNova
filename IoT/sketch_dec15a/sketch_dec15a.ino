@@ -8,7 +8,7 @@ const char* password = "42844976";
 
 // MQTT broker details
 const char* mqtt_server = "192.168.0.101";
-const int mqtt_port = 1488;
+const int mqtt_port = 1883;
 const char* mqtt_user = "";
 const char* mqtt_password = "";
 
@@ -85,20 +85,18 @@ void loop() {
     client.loop();
 
     static unsigned long lastMsgTime = 0;
-    if (millis() - lastMsgTime > 600000) {
-      lastMsgTime = millis();
+    lastMsgTime = millis();
 
-      String jsonPayload = "{";
-      jsonPayload += "\"sensor_id\":" + sensor_id + ",";
-      jsonPayload += "\"data\":" + String(temperature, 2);
-      jsonPayload += "}";
+    String jsonPayload = "{";
+    jsonPayload += "\"sensor_id\":" + sensor_id + ",";
+    jsonPayload += "\"data\":" + String(temperature, 2);
+    jsonPayload += "}";
 
-      client.publish(mqtt_topic_publish, jsonPayload.c_str());
-      Serial.println("Published: " + jsonPayload);
-    }
+    client.publish(mqtt_topic_publish, jsonPayload.c_str());
+    Serial.println("Published: " + jsonPayload);
   }
 
-  delay(100000);
+  delay(30000);
 }
 
 void connectWiFi() {

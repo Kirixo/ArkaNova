@@ -22,12 +22,23 @@ QHttpServerResponse SensorHandler::getSensor(const QHttpServerRequest& request) 
 }
 
 QHttpServerResponse SensorHandler::getSensorList(const QHttpServerRequest& request) {
-    auto sensors = sensorRepository_->getSensorsByPanelId();
+    bool ok;
+    qint64 sensorId = request.query().queryItemValue("panel_id").toLongLong(&ok);
+
+    if (!ok) {
+        return ResponseFactory::createResponse("Sensor id is missing or invalid.",
+                                               QHttpServerResponse::StatusCode::BadRequest);
+    }
+
+    auto sensors = sensorRepository_->getSensorsByPanelId(sensorId);
     QJsonArray sensorArray;
     for (const auto& sensor : sensors) {
         sensorArray.append(sensor.toJson());
     }
-    return ResponseFactory::createJsonResponse(QJsonDocument(sensorArray).toJson(),
+    QJsonObject response;
+    response["sensors"] = sensorArray;
+    response["total_count"] = 100;
+    return ResponseFactory::createJsonResponse(QJsonDocument(response).toJson(),
                                                QHttpServerResponse::StatusCode::Ok);
 }
 

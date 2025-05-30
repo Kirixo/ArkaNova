@@ -23,6 +23,13 @@ QHttpServerResponse UserHandler::getUser(const QHttpServerRequest& request) {
 }
 
 QHttpServerResponse UserHandler::updateUser(const QHttpServerRequest& request) {
+    bool ok;
+    qint64 userId = request.query().queryItemValue("id").toInt(&ok);
+
+    if (!ok) {
+        return ResponseFactory::createResponse("User id absence.",
+                                               QHttpServerResponse::StatusCode::BadRequest);
+    }
     QJsonParseError parseError;
     const auto json = QJsonDocument::fromJson(request.body(), &parseError).object();
 
@@ -30,16 +37,9 @@ QHttpServerResponse UserHandler::updateUser(const QHttpServerRequest& request) {
         return ResponseFactory::createResponse("Invalid JSON format.", QHttpServerResponse::StatusCode::BadRequest);
     }
 
-    if (!json.contains("id") || (!json.contains("email") && !json.contains("password"))) {
-        return ResponseFactory::createResponse("Missing required fields (id, email, or password).",
+    if (!json.contains("email") && !json.contains("password")) {
+        return ResponseFactory::createResponse("Missing required fields (email or password).",
                                                QHttpServerResponse::StatusCode::BadRequest);
-    }
-
-    bool ok;
-    qint64 userId = json.value("id").toString().toLongLong(&ok);
-
-    if (!ok) {
-        return ResponseFactory::createResponse("Invalid user ID format.", QHttpServerResponse::StatusCode::BadRequest);
     }
 
     auto user = userRepository_->findUserById(userId);

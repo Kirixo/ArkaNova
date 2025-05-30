@@ -8,7 +8,7 @@
 class SensorRepository {
 public:
     std::optional<Sensor> getSensorById(qint64 id);
-    QList<Sensor> getSensorsByPanelId();
+    QList<Sensor> getSensorsByPanelId(qint64 id);
     bool deleteSensor(qint64 id);
     std::optional<Sensor> createSensor(const Sensor& sensor);
 };

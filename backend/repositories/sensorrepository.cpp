@@ -25,11 +25,11 @@ std::optional<Sensor> SensorRepository::getSensorById(qint64 id) {
     return std::nullopt;
 }
 
-QList<Sensor> SensorRepository::getSensorsByPanelId() {
+QList<Sensor> SensorRepository::getSensorsByPanelId(qint64 id) {
     QList<Sensor> sensors;
     QSqlQuery query(DBController::getDatabase());
-    query.prepare("SELECT id, solar_panel_id, sensor_type_id AS type FROM sensor");
-
+    query.prepare("SELECT id, solar_panel_id, sensor_type_id AS type FROM sensor WHERE solar_panel_id = :solarPanelId;");
+    query.bindValue(":solarPanelId", id);
     if (query.exec()) {
         SensorTypeRepository sensorTypeRepository;
         SolarPanelRepository solarPanelRepository;
@@ -47,6 +47,7 @@ QList<Sensor> SensorRepository::getSensorsByPanelId() {
     }
     return sensors;
 }
+
 
 bool SensorRepository::deleteSensor(qint64 id) {
     QSqlQuery query(DBController::getDatabase());

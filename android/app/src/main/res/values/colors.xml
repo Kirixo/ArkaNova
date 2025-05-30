@@ -1,0 +1,11 @@
+<resources>
+    <color name="primary_green">#4CAF50</color>
+    <color name="secondary_blue">#2196F3</color>
+    <color name="error_red">#F44336</color>
+    <color name="neutral_white">#F1F1F1</color>
+    <color name="text_gray">#757575</color>
+    <color name="text_gray_dark">#757575</color>  <!--TODO: Make it really dark-->
+    <color name="warning_orange">#FF9800</color>
+    <color name="critical_red">#F44336</color>
+    <color name="header_dark">#212121</color>
+</resources>

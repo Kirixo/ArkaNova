@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    app:cardElevation="2dp"
+    app:cardCornerRadius="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/panel_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_solar_panel"
+            app:tint="@color/primary_green"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:contentDescription="@string/solar_panel_icon" />
+
+        <TextView
+            android:id="@+id/panel_name_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            tools:text="My Backyard Panel"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="18sp"
+            android:textColor="@color/header_dark"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/panel_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/panel_menu_button"/>
+
+        <TextView
+            android:id="@+id/panel_id_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="ID: 12345"
+            android:textAppearance="?attr/textAppearanceListItemSecondary"
+            android:textSize="14sp"
+            android:textColor="@color/text_gray"
+            app:layout_constraintStart_toStartOf="@id/panel_name_text_view"
+            app:layout_constraintTop_toBottomOf="@id/panel_name_text_view"
+            app:layout_constraintEnd_toEndOf="@id/panel_name_text_view"/>
+
+        <ImageView
+            android:id="@+id/panel_menu_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_more_vert"
+            app:tint="@color/text_gray_dark"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:contentDescription="@string/panel_options_menu" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

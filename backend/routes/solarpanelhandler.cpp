@@ -31,8 +31,10 @@ QHttpServerResponse SolarPanelHandler::getSolarPanelListByUser(const QHttpServer
     for (const auto& panel : panels) {
         panelArray.append(panel.toJson());
     }
-
-    return ResponseFactory::createJsonResponse(QJsonDocument(panelArray).toJson(), QHttpServerResponse::StatusCode::Ok);
+    QJsonObject response;
+    response["panels"] = panelArray;
+    response["total_count"] = 100;
+    return ResponseFactory::createJsonResponse(QJsonDocument(response).toJson(), QHttpServerResponse::StatusCode::Ok);
 }
 
 QHttpServerResponse SolarPanelHandler::createSolarPanel(const QHttpServerRequest& request) {
@@ -59,18 +61,19 @@ QHttpServerResponse SolarPanelHandler::createSolarPanel(const QHttpServerRequest
 }
 
 QHttpServerResponse SolarPanelHandler::updateSolarPanel(const QHttpServerRequest& request) {
+    bool ok;
+    qint64 id = request.query().queryItemValue("id").toLongLong(&ok);
+
+    if (!ok) {
+        return ResponseFactory::createResponse("Solar panel id is missing or invalid.",
+                                               QHttpServerResponse::StatusCode::BadRequest);
+    }
+
     QJsonParseError err;
     auto json = QJsonDocument::fromJson(request.body(), &err).object();
 
     if (err.error != QJsonParseError::NoError) {
         return ResponseFactory::createResponse("Invalid JSON format.", QHttpServerResponse::StatusCode::BadRequest);
-    }
-
-    bool ok;
-    qint64 id = json.value("id").toVariant().toLongLong(&ok);
-    if (!ok) {
-        return ResponseFactory::createResponse("Solar panel id is missing or invalid.",
-                                               QHttpServerResponse::StatusCode::BadRequest);
     }
 
     auto panel = solarPanelRepository_->fetchById(id);

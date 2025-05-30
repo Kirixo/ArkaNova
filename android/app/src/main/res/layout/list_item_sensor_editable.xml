@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    app:cardElevation="1dp"
+    app:cardCornerRadius="6dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/sensor_item_icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            tools:src="@drawable/ic_thermometer"
+            app:tint="@color/secondary_blue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:contentDescription="@string/sensor_icon" />
+
+        <TextView
+            android:id="@+id/sensor_item_type_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            tools:text="Temperature Sensor"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="16sp"
+            android:textColor="@color/header_dark"
+            app:layout_constraintStart_toEndOf="@id/sensor_item_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/sensor_item_delete_button"/>
+
+        <TextView
+            android:id="@+id/sensor_item_id_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="ID: 789"
+            android:textAppearance="?attr/textAppearanceListItemSecondary"
+            android:textSize="12sp"
+            android:textColor="@color/text_gray"
+            app:layout_constraintStart_toStartOf="@id/sensor_item_type_text_view"
+            app:layout_constraintTop_toBottomOf="@id/sensor_item_type_text_view"
+            app:layout_constraintEnd_toEndOf="@id/sensor_item_type_text_view"/>
+
+        <ImageButton
+            android:id="@+id/sensor_item_delete_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_delete"
+            app:tint="@color/error_red"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:contentDescription="@string/delete_sensor_button" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

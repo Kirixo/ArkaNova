@@ -76,6 +76,14 @@ QJsonObject Measurement::toJson() const
         } else {
             json["data"] = QJsonValue::Null;
         }
+    } else if (sensor_.type().name() == "power") {
+        bool ok;
+        double powerData = data_.toDouble(&ok);
+        if (ok) {
+            json["data"] = powerData;
+        } else {
+            json["data"] = QJsonValue::Null;
+        }
     } else {
         json["data"] = QJsonValue::Null;
     }

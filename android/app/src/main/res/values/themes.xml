@@ -1,0 +1,10 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.FuckingAndroid" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary_green</item>
+        <item name="colorPrimaryVariant">@color/primary_green</item>
+        <item name="colorOnPrimary">@color/neutral_white</item>
+    </style>
+
+    <style name="Theme.FuckingAndroid" parent="Base.Theme.FuckingAndroid" />
+</resources>

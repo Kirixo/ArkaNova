@@ -45,7 +45,10 @@ QHttpServerResponse MeasurementHandler::getMeasurementsBySensor(const QHttpServe
     for (const auto& measurement : measurements) {
         jsonMeasurements.append(measurement.toJson());
     }
+    QJsonObject response;
+    response["measurements"] = jsonMeasurements;
+    response["total_count"] = 100;
 
-    return ResponseFactory::createJsonResponse(QJsonDocument(jsonMeasurements).toJson(),
+    return ResponseFactory::createJsonResponse(QJsonDocument(response).toJson(),
                                                QHttpServerResponse::StatusCode::Ok);
 }
