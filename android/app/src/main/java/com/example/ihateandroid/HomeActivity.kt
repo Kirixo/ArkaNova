@@ -1,4 +1,4 @@
-package com.example.fuckingandroid
+package com.example.ihateandroid
 
 import android.content.Context
 import android.content.Intent
@@ -16,7 +16,6 @@ import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class HomeActivity : AppCompatActivity() {

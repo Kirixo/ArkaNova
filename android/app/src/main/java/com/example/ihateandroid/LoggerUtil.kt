@@ -1,4 +1,4 @@
-package com.example.fuckingandroid
+package com.example.ihateandroid
 
 import java.util.logging.Logger
 import java.util.logging.Level

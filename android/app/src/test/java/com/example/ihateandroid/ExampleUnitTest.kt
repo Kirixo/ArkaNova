@@ -1,4 +1,4 @@
-package com.example.fuckingandroid
+package com.example.ihateandroid
 
 import org.junit.Test
 

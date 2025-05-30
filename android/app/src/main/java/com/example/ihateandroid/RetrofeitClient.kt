@@ -1,4 +1,4 @@
-package com.example.fuckingandroid
+package com.example.ihateandroid
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

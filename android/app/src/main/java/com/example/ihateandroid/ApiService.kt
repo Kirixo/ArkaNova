@@ -1,4 +1,4 @@
-package com.example.fuckingandroid
+package com.example.ihateandroid
 
 import retrofit2.Response
 import retrofit2.http.*
