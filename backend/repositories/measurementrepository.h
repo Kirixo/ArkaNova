@@ -10,6 +10,7 @@ public:
     QList<Measurement> getMeasurementsBySensorAndDate(qint64 sensorId, const QDateTime &startDate, const QDateTime &endDate);
     std::optional<Measurement> createMeasurement(const QByteArray& data, qint64 sensorId);
     void saveMeasurementToDatabase(const QByteArray& message);
+    std::optional<Measurement> getLatestMeasurementBySensorId(qint64 sensorId); // New method
 };
 
 #endif // MEASUREMENTREPOSITORY_H

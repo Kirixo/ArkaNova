@@ -112,3 +112,30 @@ std::optional<Measurement> MeasurementRepository::createMeasurement(const QByteA
     return Measurement(id, storedData, recordedAt, retrievedSensor.value());
 }
 
+std::optional<Measurement> MeasurementRepository::getLatestMeasurementBySensorId(qint64 sensorId) {
+    QSqlQuery query(DBController::getDatabase());
+    QString queryString = R"(
+        SELECT id, data, recorded_at, sensor_id
+        FROM measurement
+        WHERE sensor_id = :sensor_id
+        ORDER BY recorded_at DESC
+        LIMIT 1
+    )";
+    query.prepare(queryString);
+    query.bindValue(":sensor_id", sensorId);
+
+    if (query.exec() && query.next()) {
+        SensorRepository sensorRepository;
+        qint64 measurementId = query.value("id").toLongLong();
+        QByteArray data = query.value("data").toByteArray();
+        QDateTime recordedAt = query.value("recorded_at").toDateTime();
+        auto sensor = sensorRepository.getSensorById(query.value("sensor_id").toLongLong());
+        if (!sensor) {
+            return std::nullopt;
+        }
+        return Measurement(measurementId, data, recordedAt, sensor.value());
+    }
+
+    qDebug() << "Database error while fetching the latest measurement by Sensor ID:" << query.lastError().text();
+    return std::nullopt;
+}

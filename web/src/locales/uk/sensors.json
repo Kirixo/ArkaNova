@@ -1,0 +1,58 @@
+{
+  "title": "Сенсори",
+  "subtitle": "Моніторинг та керування сенсорами сонячних панелей",
+  "buttons": {
+    "addSensor": "Додати сенсор"
+  },
+  "table": {
+    "id": "ID",
+    "type": "Тип",
+    "panelId": "ID панелі",
+    "panelName": "Розташування панелі",
+    "latestData": "Останні дані",
+    "lastUpdated": "Останнє оновлення",
+    "actions": "Дії",
+    "noSensors": "Сенсори не знайдено",
+    "noData": "Немає даних",
+    "never": "Ніколи",
+    "unknownPanel": "Невідома панель"
+  },
+  "addDialog": {
+    "title": "Додати новий сенсор",
+    "type": "Тип сенсора",
+    "panel": "Сонячна панель",
+    "panelName": "Панель {{id}} ({{location}})",
+    "save": "Зберегти",
+    "cancel": "Скасувати"
+  },
+  "deleteDialog": {
+    "title": "Видалити сенсор",
+    "message": "Ви впевнені, що хочете видалити сенсор #{{id}}?",
+    "confirm": "Видалити",
+    "cancel": "Скасувати"
+  },
+  "types": {
+    "temperature": "Температура",
+    "voltage": "Напруга",
+    "current": "Струм",
+    "power": "Потужність"
+  },
+  "units": {
+    "temperature": "°C",
+    "voltage": "В",
+    "current": "А",
+    "power": "кВт"
+  },
+  "status": {
+    "active": "Активний",
+    "inactive": "Неактивний",
+    "error": "Помилка",
+    "unknown": "Невідомо",
+    "never": "Ніколи"
+  },
+  "errors": {
+    "loadFailed": "Не вдалося завантажити сенсори",
+    "addFailed": "Не вдалося додати сенсор",
+    "deleteFailed": "Не вдалося видалити сенсор"
+  }
+} 

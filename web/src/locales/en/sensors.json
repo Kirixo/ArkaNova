@@ -1,0 +1,58 @@
+{
+  "title": "Sensors",
+  "subtitle": "Monitor and manage your solar panel sensors",
+  "buttons": {
+    "addSensor": "Add Sensor"
+  },
+  "table": {
+    "id": "ID",
+    "type": "Type",
+    "panelId": "Panel ID",
+    "panelName": "Panel Location",
+    "latestData": "Latest Data",
+    "lastUpdated": "Last Updated",
+    "actions": "Actions",
+    "noSensors": "No sensors found",
+    "noData": "No data available",
+    "never": "Never",
+    "unknownPanel": "Unknown panel"
+  },
+  "addDialog": {
+    "title": "Add New Sensor",
+    "type": "Sensor Type",
+    "panel": "Solar Panel",
+    "panelName": "Panel {{id}} ({{location}})",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "deleteDialog": {
+    "title": "Delete Sensor",
+    "message": "Are you sure you want to delete sensor #{{id}}?",
+    "confirm": "Delete",
+    "cancel": "Cancel"
+  },
+  "types": {
+    "temperature": "Temperature",
+    "voltage": "Voltage",
+    "current": "Current",
+    "power": "Power"
+  },
+  "units": {
+    "temperature": "°C",
+    "voltage": "V",
+    "current": "A",
+    "power": "kW"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "error": "Error",
+    "unknown": "Unknown",
+    "never": "Never"
+  },
+  "errors": {
+    "loadFailed": "Failed to load sensors",
+    "addFailed": "Failed to add sensor",
+    "deleteFailed": "Failed to delete sensor"
+  }
+} 

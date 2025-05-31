@@ -1,0 +1,37 @@
+{
+  "title": "Панель моніторингу",
+  "filters": {
+    "panel": "Сонячна панель",
+    "timeRange": "Часовий діапазон",
+    "sensor": "Датчик",
+    "timeRanges": {
+      "hourly": "Погодинно",
+      "daily": "Щоденно",
+      "weekly": "Щотижня"
+    },
+    "panelName": "Панель №{{id}} ({{location}})",
+    "sensorName": "{{type}} №{{id}}"
+  },
+  "sensorTypes": {
+    "temperature": "Температура",
+    "power": "Потужність"
+  },
+  "charts": {
+    "temperature": {
+      "title": "Температура",
+      "yAxis": "Температура (°C)"
+    },
+    "power": {
+      "title": "Генерація енергії",
+      "yAxis": "Потужність (кВт⋅год)"
+    }
+  },
+  "summary": {
+    "avgTemp": "Середня температура",
+    "totalEnergy": "Загальна вироблена енергія"
+  },
+  "errors": {
+    "loadFailed": "Не вдалося завантажити дані",
+    "noData": "Немає даних для обраного періоду"
+  }
+} 

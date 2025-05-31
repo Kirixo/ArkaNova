@@ -1,0 +1,43 @@
+{
+  "title": "Admin Dashboard",
+  "metrics": {
+    "userCount": "Total Users"
+  },
+  "table": {
+    "id": "ID",
+    "email": "Email",
+    "actions": "Actions"
+  },
+  "buttons": {
+    "manageUsers": "Manage Users",
+    "backups": "Backups",
+    "importExport": "Export/Import",
+    "addUser": "Add User"
+  },
+  "addDialog": {
+    "title": "Add New User",
+    "email": "Email",
+    "password": "Password",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "editDialog": {
+    "title": "Edit User",
+    "email": "Email",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "deleteDialog": {
+    "title": "Delete User",
+    "message": "Are you sure you want to delete user {{email}}?",
+    "confirm": "Delete",
+    "cancel": "Cancel"
+  },
+  "language": "Language",
+  "errors": {
+    "loadFailed": "Failed to load users",
+    "deleteFailed": "Failed to delete user",
+    "updateFailed": "Failed to update user",
+    "createFailed": "Failed to create user"
+  }
+} 

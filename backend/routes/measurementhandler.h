@@ -10,6 +10,7 @@ public:
     MeasurementHandler();
     QHttpServerResponse getMeasurementsBySensor(const QHttpServerRequest &request);
     QHttpServerResponse getMeasurementById(const QHttpServerRequest &request);
+    QHttpServerResponse getLatestMeasurementBySensor(const QHttpServerRequest& request); // New method
 private:
     std::shared_ptr<MeasurementRepository> measurementRepository_;
 };

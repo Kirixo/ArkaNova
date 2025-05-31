@@ -1,0 +1,37 @@
+{
+  "title": "Dashboard",
+  "filters": {
+    "panel": "Solar Panel",
+    "timeRange": "Time Range",
+    "sensor": "Sensor",
+    "timeRanges": {
+      "hourly": "Hourly",
+      "daily": "Daily",
+      "weekly": "Weekly"
+    },
+    "panelName": "Panel #{{id}} ({{location}})",
+    "sensorName": "{{type}} #{{id}}"
+  },
+  "sensorTypes": {
+    "temperature": "Temperature",
+    "power": "Power"
+  },
+  "charts": {
+    "temperature": {
+      "title": "Temperature",
+      "yAxis": "Temperature (°C)"
+    },
+    "power": {
+      "title": "Power Generation",
+      "yAxis": "Power (kWh)"
+    }
+  },
+  "summary": {
+    "avgTemp": "Average Temperature",
+    "totalEnergy": "Total Energy Generated"
+  },
+  "errors": {
+    "loadFailed": "Failed to load data",
+    "noData": "No data available for selected time range"
+  }
+} 

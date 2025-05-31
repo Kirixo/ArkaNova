@@ -3,7 +3,10 @@
 #include "../utils/responsefactory.h"
 #include <QJsonArray>
 
-MeasurementHandler::MeasurementHandler() {}
+MeasurementHandler::MeasurementHandler() {
+    // It's good practice to initialize shared_ptr in the constructor
+    measurementRepository_ = std::make_shared<MeasurementRepository>();
+}
 
 QHttpServerResponse MeasurementHandler::getMeasurementById(const QHttpServerRequest& request) {
     bool ok;
@@ -47,8 +50,26 @@ QHttpServerResponse MeasurementHandler::getMeasurementsBySensor(const QHttpServe
     }
     QJsonObject response;
     response["measurements"] = jsonMeasurements;
-    response["total_count"] = 100;
+    // The total_count seems to be hardcoded, you might want to adjust this
+    response["total_count"] = measurements.count(); // Or actual count if paginating
 
     return ResponseFactory::createJsonResponse(QJsonDocument(response).toJson(),
                                                QHttpServerResponse::StatusCode::Ok);
+}
+
+QHttpServerResponse MeasurementHandler::getLatestMeasurementBySensor(const QHttpServerRequest& request) {
+    bool ok;
+    qint64 sensorId = request.query().queryItemValue("sensor_id").toLongLong(&ok);
+
+    if (!ok) {
+        return ResponseFactory::createResponse("Sensor ID is missing or invalid.",
+                                               QHttpServerResponse::StatusCode::BadRequest);
+    }
+
+    auto measurement = measurementRepository_->getLatestMeasurementBySensorId(sensorId);
+    if (measurement) {
+        QByteArray responseData = QJsonDocument(measurement->toJson()).toJson(QJsonDocument::Compact);
+        return ResponseFactory::createJsonResponse(responseData, QHttpServerResponse::StatusCode::Ok);
+    }
+    return ResponseFactory::createResponse("Latest measurement not found for this sensor or sensor does not exist.", QHttpServerResponse::StatusCode::NotFound);
 }

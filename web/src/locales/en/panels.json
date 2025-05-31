@@ -1,0 +1,41 @@
+{
+  "title": "Solar Panels",
+  "subtitle": "Manage your solar panel installations",
+  "buttons": {
+    "addPanel": "Add Panel"
+  },
+  "table": {
+    "id": "ID",
+    "location": "Location",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At",
+    "actions": "Actions",
+    "noPanels": "No solar panels found"
+  },
+  "addDialog": {
+    "title": "Add New Panel",
+    "location": "Location",
+    "locationPlaceholder": "Enter panel location",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "editDialog": {
+    "title": "Edit Panel",
+    "location": "Location",
+    "locationPlaceholder": "Enter panel location",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "deleteDialog": {
+    "title": "Delete Panel",
+    "message": "Are you sure you want to delete panel #{{id}}?",
+    "confirm": "Delete",
+    "cancel": "Cancel"
+  },
+  "errors": {
+    "loadFailed": "Failed to load solar panels",
+    "saveFailed": "Failed to save panel",
+    "deleteFailed": "Failed to delete panel",
+    "locationRequired": "Location is required"
+  }
+} 

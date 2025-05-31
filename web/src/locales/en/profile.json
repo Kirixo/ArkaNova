@@ -1,0 +1,28 @@
+{
+  "title": "Profile",
+  "email": "Email",
+  "language": "Language",
+  "buttons": {
+    "logout": "Logout",
+    "deleteAccount": "Delete Account"
+  },
+  "editDialog": {
+    "title": "Edit Profile",
+    "email": "Email",
+    "password": "Password (optional)",
+    "passwordPlaceholder": "Leave blank to keep current password",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "deleteDialog": {
+    "title": "Delete Account",
+    "message": "Are you sure you want to delete your account? This action cannot be undone.",
+    "confirm": "Delete",
+    "cancel": "Cancel"
+  },
+  "errors": {
+    "loadFailed": "Failed to load profile",
+    "updateFailed": "Failed to update profile",
+    "deleteFailed": "Failed to delete account"
+  }
+} 
