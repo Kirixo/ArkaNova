@@ -172,14 +172,15 @@ const LoginPage: React.FC = () => {
         >
           {/* Logo */}
           <Box sx={{ textAlign: 'center', mb: 3 }}>
-            <svg
-              width="48"
-              height="48"
-              viewBox="0 0 48 48"
-              fill="#4CAF50"
-            >
-              <rect width="48" height="48" rx="8" />
-            </svg>
+            <img
+              src="/android-logo.png"
+              alt="ArkaNova Logo"
+              style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '8px',
+              }}
+            />
           </Box>
 
           {/* Title */}

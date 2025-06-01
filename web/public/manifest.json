@@ -1,0 +1,15 @@
+{
+  "short_name": "ArkaNova",
+  "name": "ArkaNova - Solar Panel Management",
+  "icons": [
+    {
+      "src": "android-logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#4CAF50",
+  "background_color": "#F1F1F1"
+} 

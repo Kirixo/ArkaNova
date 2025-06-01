@@ -6,12 +6,14 @@
   "table": {
     "id": "ID",
     "email": "Email",
-    "actions": "Actions"
+    "actions": "Actions",
+    "rowsPerPage": "Rows per page:",
+    "displayedRows": "{{from}}-{{to}} of {{count}}"
   },
   "buttons": {
     "manageUsers": "Manage Users",
-    "backups": "Backups",
-    "importExport": "Export/Import",
+    "export": "Export Backup",
+    "import": "Import Backup",
     "addUser": "Add User"
   },
   "addDialog": {
@@ -38,6 +40,8 @@
     "loadFailed": "Failed to load users",
     "deleteFailed": "Failed to delete user",
     "updateFailed": "Failed to update user",
-    "createFailed": "Failed to create user"
+    "createFailed": "Failed to create user",
+    "exportFailed": "Failed to export backup",
+    "importFailed": "Failed to import backup"
   }
 } 

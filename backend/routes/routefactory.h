@@ -11,6 +11,7 @@ public:
 
     void registerAllRoutes();
 
+    void setupBackupRoutes();
 private:
     std::shared_ptr<DBController> dbcontroller_;
     std::shared_ptr<QHttpServer> server_;

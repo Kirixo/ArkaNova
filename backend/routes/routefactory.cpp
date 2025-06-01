@@ -5,6 +5,8 @@
 #include "sensorhandler.h"
 #include "solarpanelhandler.h"
 #include "userhandler.h"
+#include "backuphandler.h" // Include the new backup handler
+#include "../controllers/dbcontroller.h" // For passing to BackupHandler
 
 RouteFactory::RouteFactory(std::shared_ptr<QHttpServer> server, std::shared_ptr<DBController> dbcontroller)
     : server_(server), dbcontroller_(dbcontroller) {}
@@ -16,6 +18,7 @@ void RouteFactory::registerAllRoutes()
     setupSensorRoutes();
     setupSolarPanelRoutes();
     setupMeasurementRoutes();
+    setupBackupRoutes();
 }
 
 void RouteFactory::setupUserRoutes() {
@@ -116,6 +119,26 @@ void RouteFactory::setupMeasurementRoutes() {
     server_->route("/api/measurement/latest/sensor", QHttpServerRequest::Method::Get,
                    [measurementHandler](const QHttpServerRequest& request) {
                        return measurementHandler->getLatestMeasurementBySensor(request);
+                   });
+}
+
+
+void RouteFactory::setupBackupRoutes() {
+    if (!server_ || !dbcontroller_) { // Ensure dbcontroller is also available
+        qCritical() << "Server or DBController not available for backup routes.";
+        return;
+    }
+    // BackupHandler needs the DBController for transactions
+    auto backupHandler = std::make_shared<BackupHandler>(dbcontroller_);
+
+    server_->route("/api/admin/backup/export", QHttpServerRequest::Method::Get,
+                   [backupHandler](const QHttpServerRequest& request) {
+                       return backupHandler->exportDatabase(request);
+                   });
+
+    server_->route("/api/admin/backup/import", QHttpServerRequest::Method::Post,
+                   [backupHandler](const QHttpServerRequest& request) {
+                       return backupHandler->importDatabase(request);
                    });
 }
 

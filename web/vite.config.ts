@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   server: {
+    port: 3000,
     proxy: {
       '/api': {
         target: 'https://literate-vastly-pony.ngrok-free.app',
@@ -19,5 +20,8 @@ export default defineConfig({
         },
       },
     },
+  },
+  build: {
+    outDir: 'dist',
   },
 })

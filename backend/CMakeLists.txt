@@ -40,6 +40,7 @@ add_executable(ArkaNova
   routes/solarpanelhandler.h routes/solarpanelhandler.cpp
   routes/measurementhandler.h routes/measurementhandler.cpp
   routes/mqttmeasurementhandler.h routes/mqttmeasurementhandler.cpp
+  routes/backuphandler.h routes/backuphandler.cpp
 )
 
 target_link_libraries(ArkaNova Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Sql

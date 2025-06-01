@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
@@ -26,11 +26,12 @@ import {
   DialogContent,
   DialogActions,
   TextField,
+  CircularProgress,
 } from '@mui/material';
 import {
   People as PeopleIcon,
-  Backup as BackupIcon,
-  ImportExport as ImportExportIcon,
+  FileDownload as ExportIcon,
+  FileUpload as ImportIcon,
   Edit as EditIcon,
   Delete as DeleteIcon,
   Add as AddIcon,
@@ -71,6 +72,9 @@ const AdminDashboardPage: React.FC = () => {
     email: '',
     password: '',
   });
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [importLoading, setImportLoading] = useState(false);
+  const [exportLoading, setExportLoading] = useState(false);
 
   const loadUsers = async (pageNum: number, pageSize: number) => {
     try {
@@ -197,6 +201,84 @@ const AdminDashboardPage: React.FC = () => {
     }
   };
 
+  const handleExport = async () => {
+    try {
+      setExportLoading(true);
+      setError(null);
+
+      const response = await fetch(`${API_CONFIG.BASE_URL}/api/admin/backup/export`, {
+        headers: {
+          'ngrok-skip-browser-warning': 'true',
+        },
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to export backup');
+      }
+
+      // Get the filename from the Content-Disposition header or use a default
+      const contentDisposition = response.headers.get('Content-Disposition');
+      const filenameMatch = contentDisposition?.match(/filename="?([^"]+)"?/);
+      const filename = filenameMatch?.[1] || `arkanova-backup-${new Date().toISOString()}.sql`;
+
+      // Convert response to blob and download
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error('Export failed:', err);
+      setError(t('errors.exportFailed'));
+    } finally {
+      setExportLoading(false);
+    }
+  };
+
+  const handleImport = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    try {
+      setImportLoading(true);
+      setError(null);
+
+      // Read file as binary data
+      const fileData = await file.arrayBuffer();
+
+      const response = await fetch(`${API_CONFIG.BASE_URL}/api/admin/backup/import`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/octet-stream',
+          'ngrok-skip-browser-warning': 'true',
+        },
+        credentials: 'include',
+        body: fileData
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to import backup');
+      }
+
+      // Refresh the user list after successful import
+      loadUsers(page, limit);
+    } catch (err) {
+      console.error('Import failed:', err);
+      setError(t('errors.importFailed'));
+    } finally {
+      setImportLoading(false);
+      // Reset the file input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
+  };
+
   useEffect(() => {
     loadUsers(page, limit);
   }, [page, limit]);
@@ -296,20 +378,37 @@ const AdminDashboardPage: React.FC = () => {
             <Button
               fullWidth
               variant="contained"
-              startIcon={<BackupIcon />}
-              onClick={() => navigate('/admin/backups')}
+              startIcon={<ExportIcon />}
+              onClick={handleExport}
+              disabled={exportLoading}
               sx={{ backgroundColor: '#2196F3', flex: { sm: '1 1 calc(33% - 8px)', md: '1 1 calc(25% - 12px)' } }}
             >
-              {t('buttons.backups')}
+              {exportLoading ? (
+                <CircularProgress size={24} color="inherit" />
+              ) : (
+                t('buttons.export')
+              )}
             </Button>
             <Button
               fullWidth
               variant="contained"
-              startIcon={<ImportExportIcon />}
-              onClick={() => navigate('/admin/import-export')}
+              component="label"
+              startIcon={<ImportIcon />}
+              disabled={importLoading}
               sx={{ backgroundColor: '#4CAF50', flex: { sm: '1 1 calc(33% - 8px)', md: '1 1 calc(25% - 12px)' } }}
             >
-              {t('buttons.importExport')}
+              {importLoading ? (
+                <CircularProgress size={24} color="inherit" />
+              ) : (
+                t('buttons.import')
+              )}
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".sql"
+                hidden
+                onChange={handleImport}
+              />
             </Button>
           </Stack>
 
@@ -358,6 +457,10 @@ const AdminDashboardPage: React.FC = () => {
               rowsPerPage={limit}
               onRowsPerPageChange={handleChangeRowsPerPage}
               rowsPerPageOptions={[10, 25, 50]}
+              labelRowsPerPage={t('table.rowsPerPage')}
+              labelDisplayedRows={({ from, to, count }) =>
+                t('table.displayedRows', { from, to, count })
+              }
             />
           </TableContainer>
         </Container>

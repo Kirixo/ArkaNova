@@ -16,8 +16,9 @@ public:
     // New method for creating standardized JSON error responses
     static QHttpServerResponse createErrorResponse(const QString &errorMessage, QHttpServerResponse::StatusCode statusCode);
 
-private:
     static void addCorsHeaders(QHttpServerResponse &response);
+private:
+
 };
 
 #endif // RESPONSEFACTORYH_H
