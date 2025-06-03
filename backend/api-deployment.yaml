@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-qt-api-deployment
+  labels:
+    app: my-qt-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-qt-api
+  template:
+    metadata:
+      labels:
+        app: my-qt-api
+    spec:
+      containers:
+      - name: my-qt-api-container
+        image: kirixo/arkanova-api:latest
+        ports:
+        - containerPort: 4925
+        volumeMounts:
+        - name: app-volume
+          mountPath: /app
+        - name: build-volume
+          mountPath: /build
+      volumes:
+      - name: app-volume
+        hostPath:
+          path: /run/desktop/mnt/host/e/@Projects/ArkaNova/backend
+          type: DirectoryOrCreate
+      - name: build-volume
+        hostPath:
+          path: /run/desktop/mnt/host/e/@Projects/ArkaNova/backend/dockerbuild
+          type: DirectoryOrCreate

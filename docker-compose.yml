@@ -2,8 +2,10 @@ services:
   api:
     build: ./backend
     depends_on:
-      - mqttbroker
-      - database
+      database:
+        condition: service_healthy # Wait for database to be healthy
+      mqttbroker:
+        condition: service_started
     volumes:
       - ./backend:/app
       - ./backend/dockerbuild:/build
@@ -23,9 +25,15 @@ services:
       - ./db/ArkaNova.sql:/docker-entrypoint-initdb.d/ArkaNova.sql
     networks:
       - db-network
+    healthcheck: # Add healthcheck for PostgreSQL
+      test: [ "CMD-SHELL", "pg_isready -U kirixo -d arkanovadb -q" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
   ngrok:
     image: ngrok/ngrok:latest
-    command: http app:4925 --url=literate-vastly-pony.ngrok-free.app
+    command: http api:4925 --url=literate-vastly-pony.ngrok-free.app
     environment: 
       NGROK_AUTHTOKEN: 2hAY34ptDMfqzhti7skGACsKB5c_64p8iSLUv9Q5TJv7ckLfV
     networks:

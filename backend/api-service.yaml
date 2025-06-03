@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-qt-api-service
+spec:
+  selector:
+    app: my-qt-api
+  ports:
+    - protocol: TCP
+      port: 80        
+      targetPort: 4925
+  type: NodePort      
+                  
